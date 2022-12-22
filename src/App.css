@@ -1,3 +1,22 @@
 .App {
     text-align: center;
 }
+
+.card {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    left: 50%;
+}
+
+.card-item {
+    background-color: blueviolet;
+    width: 500px;
+    border-radius: 22px;
+    padding: 10px;
+    margin: 10px;
+    font-size: 12px;
+    box-shadow: 1px 3px 5px rgb(54, 16, 90);
+}

@@ -50,9 +50,12 @@ function App() {
       <hr />
       {quote.map((q) => {
         return (
-          <div key={q[0]}>
-            <h3>{q[1].nama}</h3>
-            <h3>{q[1].quotes}</h3>
+          <div className="card">
+            <div className="card-item" key={q[0]}>
+              <h3>{q[1].nama}</h3>
+              <h3>{q[1].quotes}</h3>
+              <button>Hapus</button>
+            </div>
           </div>
         );
       })}
