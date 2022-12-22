@@ -2,6 +2,11 @@
     text-align: center;
 }
 
+* {
+    margin: 0;
+    padding: 0;
+}
+
 .card {
     display: flex;
     width: 100%;
@@ -12,11 +17,57 @@
 }
 
 .card-item {
-    background-color: blueviolet;
+    background: rgb(149, 16, 201);
+    background: linear-gradient(335deg, rgba(149, 16, 201, 1) 0%, rgba(117, 29, 223, 1) 71%, rgba(78, 181, 201, 1) 100%);
     width: 500px;
     border-radius: 22px;
     padding: 10px;
     margin: 10px;
     font-size: 12px;
     box-shadow: 1px 3px 5px rgb(54, 16, 90);
+}
+
+.card-item .btn {
+    width: 80px;
+    height: 30px;
+    margin-top: 10px;
+    border-radius: 10px;
+    background: rgb(255, 0, 0);
+    background: linear-gradient(70deg, rgba(255, 0, 0, 1) 0%, rgba(170, 17, 17, 1) 60%, rgba(241, 4, 156, 1) 100%);
+    color: white;
+    border: none;
+    box-shadow: 1px 3px 5px rgb(62, 16, 16);
+    cursor: pointer;
+}
+
+.f-input {
+    background: rgb(149, 16, 201);
+    background: linear-gradient(90deg, rgba(149, 16, 201, 1) 0%, rgba(117, 29, 223, 1) 71%, rgba(78, 181, 201, 1) 100%);
+    padding: 20px;
+}
+
+.f-input h1 {
+    color: white;
+}
+
+.f-input input {
+    width: 500px;
+    height: 30px;
+    margin: 5px;
+    border-radius: 7px;
+    font-size: 15px;
+    border: none;
+}
+
+.f-input button {
+    width: 100px;
+    height: 30px;
+    margin-top: 10px;
+    border-radius: 10px;
+    background: rgb(27, 135, 128);
+    background: linear-gradient(335deg, rgba(27, 135, 128, 1) 0%, rgba(29, 223, 51, 1) 71%, rgba(78, 201, 88, 1) 100%);
+    color: white;
+    border: none;
+    box-shadow: 1px 3px 5px rgb(17, 77, 57);
+    cursor: pointer;
 }

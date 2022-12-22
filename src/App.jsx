@@ -4,57 +4,94 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 function App() {
+  const endPoint = "https://myquotes-ebeaa-default-rtdb.firebaseio.com/quotes";
   const [quote, setQuote] = useState([]);
   const [newName, setNewName] = useState("");
   const [newQuote, setNewQuote] = useState("");
 
-  useEffect(() => {
-    axios.get("https://myquotes-ebeaa-default-rtdb.firebaseio.com/quotes.json").then((res) => {
+  // get data
+  const getData = async () => {
+    try {
+      let res = await axios.get(endPoint + `.json`);
       const array = Object.entries(res.data);
       setQuote(array);
-      console.log(array);
-    });
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+
+  useEffect(() => {
+    // axios.get(endPoint + `.json`).then((res) => {
+    //   const array = Object.entries(res.data);
+    //   setQuote(array);
+    //    console.log(array);
+    // });
+
+    // cara get ke-2
+    getData();
   }, []);
 
-  function createData() {
-    axios.post("https://myquotes-ebeaa-default-rtdb.firebaseio.com/quotes.json", {
-      nama: newName,
-      quotes: newQuote,
+  // create data
+  // function createData() {
+  //   axios.post(endPoint + `.json`, {
+  //     nama: newName,
+  //     quotes: newQuote,
+  //   });
+  //   getData();
+  // }
+  const createData = async () => {
+    if ((newName && newQuote) == "") {
+      alert("data tidak boleh kosong!");
+    } else {
+      await axios.post(endPoint + `.json`, {
+        nama: newName,
+        quotes: newQuote,
+      });
+      getData();
+    }
+  };
+
+  // delete data
+  const handleDelete = (id) => {
+    axios.delete(endPoint + `/` + id + `.json`).then(function (response) {
+      // window.location.reload(false);
+      getData();
     });
-  }
-  const createUser = () => {
-    createData();
-    window.location.reload(false);
   };
 
   return (
     <div className="App">
-      <h1>halaman utama</h1>
-      <input
-        type="text"
-        placeholder="nama..."
-        onChange={(event) => {
-          setNewName(event.target.value);
-        }}
-      />
-      {" | "}
-      <input
-        type="text"
-        placeholder="quotes..."
-        onChange={(event) => {
-          setNewQuote(event.target.value);
-        }}
-      />
-      <button onClick={createUser}>Submit</button>
+      <div className="f-input">
+        <h1>Quotes</h1>
+        <input
+          type="text"
+          placeholder="   nama..."
+          onChange={(event) => {
+            setNewName(event.target.value);
+          }}
+        />
+        <br />
+        <input
+          type="text"
+          placeholder="   quotes..."
+          onChange={(event) => {
+            setNewQuote(event.target.value);
+          }}
+        />
+        <br />
+        <button onClick={createData}>Simpan</button>
+      </div>
       <br />
-      <hr />
+
       {quote.map((q) => {
         return (
-          <div className="card">
-            <div className="card-item" key={q[0]}>
+          <div className="card" key={q[0]}>
+            <div className="card-item">
               <h3>{q[1].nama}</h3>
-              <h3>{q[1].quotes}</h3>
-              <button>Hapus</button>
+              <h4>~ {q[1].quotes} ~</h4>
+              <button className="btn" onClick={() => handleDelete(q[0])}>
+                Hapus
+              </button>
             </div>
           </div>
         );
