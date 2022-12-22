@@ -5,6 +5,7 @@ import axios from "axios";
 
 function App() {
   const endPoint = "https://myquotes-ebeaa-default-rtdb.firebaseio.com/quotes";
+  const token = "?auth=uAnGa9zGrRe81otneeZH6tEluIYRsdophslSJyqE";
   const [quote, setQuote] = useState([]);
   const [newName, setNewName] = useState("");
   const [newQuote, setNewQuote] = useState("");
@@ -12,7 +13,7 @@ function App() {
   // get data
   const getData = async () => {
     try {
-      let res = await axios.get(endPoint + `.json`);
+      let res = await axios.get(endPoint + `.json` + token);
       const array = Object.entries(res.data);
       setQuote(array);
     } catch (e) {
@@ -40,20 +41,16 @@ function App() {
   //   getData();
   // }
   const createData = async () => {
-    if ((newName && newQuote) == "") {
-      alert("data tidak boleh kosong!");
-    } else {
-      await axios.post(endPoint + `.json`, {
-        nama: newName,
-        quotes: newQuote,
-      });
-      getData();
-    }
+    await axios.post(endPoint + `.json` + token, {
+      nama: newName,
+      quotes: newQuote,
+    });
+    getData();
   };
 
   // delete data
   const handleDelete = (id) => {
-    axios.delete(endPoint + `/` + id + `.json`).then(function (response) {
+    axios.delete(endPoint + `/` + id + `.json` + token).then(function (response) {
       // window.location.reload(false);
       getData();
     });
